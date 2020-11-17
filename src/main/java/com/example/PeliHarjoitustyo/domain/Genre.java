@@ -8,6 +8,10 @@ import javax.persistence.Id;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import com.sun.istack.NotNull;
 
 @Entity
 public class Genre {
@@ -15,6 +19,9 @@ public class Genre {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long genre_id;
+	
+	@NotNull
+    @Size(min=1, max=50)
 	String name;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "genre")

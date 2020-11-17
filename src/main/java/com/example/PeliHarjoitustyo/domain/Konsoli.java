@@ -6,8 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sun.istack.NotNull;
 
 import java.util.List;
 
@@ -16,8 +19,14 @@ public class Konsoli {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long konsoli_id;
+	@NotNull
+    @Size(min=1, max=50)
 	private String name;
+	@NotNull
+    @Size(min=1, max=50)
 	private String publisher;
+	@NotNull
+    @Size(min=1, max=50)
 	private double price;
 
 
