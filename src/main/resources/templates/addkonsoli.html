@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>konsolilista</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+	  
+	<h1>Lisää uusi Konsoli</h1>
+	<form th:object="${konsoli}" th:action="@{/savekonsoli}" action="#" method="post">
+		<label for="name">Nimi: </label>
+		<input type="text" id="name" th:field="*{name}" /></br>
+		
+		<label for="publisher">Julkaisija: </label>
+		<input type="text" id="publisher" th:field="*{publisher}" /></br>
+		
+		<label for="price">Hinta: </label>
+		<input type="text" id="price" th:field="*{price}" /></br>
+		
+		<input type="submit" value="Valmis"></input>
+	</form>
+	
+	
+	
+
+
+	
+</body>
+</html>

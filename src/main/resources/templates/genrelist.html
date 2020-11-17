@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>genrelista</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+	<h1>Tietokannassa olevat genret</h1>
+	<table>
+		<tr th:each= "genre:${genres}">
+			<td th:text= "${ genre.name }"></td>
+  			<td><a th:href="@{/genret/{id}/pelit(id=${genre.genre_id})}">Näytä</a></td>
+			<td><a th:href="@{/deletegenre/{id}(id=${genre.genre_id})}">Delete</a></td>
+		</tr>
+	</table>
+
+	<a th:href="@{/addgenre}">Lisää uusi genre</a><br />
+	<a th:href="@{/pelilist}">Pelit</a><br />
+	<a th:href="@{/}">Konsolit</a><br />
+	<a th:href="@{/resthome}">REST API</a>
+	
+</body>
+</html>

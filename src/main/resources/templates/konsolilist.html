@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>konsolilista</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+	<h1>Tietokannassa olevat konsolit</h1>
+	<table>
+		<tr th:each= "konsoli:${konsolit}">
+			<td th:text= "${ konsoli.name }"></td>
+			<td th:text= "${ konsoli.publisher }"></td>
+			<td th:text= "${ konsoli.price }"></td>
+  			<td><a th:href="@{/konsolit/{id}(id=${konsoli.konsoli_id})}">Näytä </a></td>
+			<td><a th:href="@{/deletekonsoli/{id}(id=${konsoli.konsoli_id})}">Poista</a></td>
+		</tr>
+	</table>
+
+	<a th:href="@{/addkonsoli}">Lisää uusi konsoli</a><br />
+	<a th:href="@{/pelilist}">Pelit</a><br />
+	<a th:href="@{/genrelist}">Genret</a><br />
+	<a th:href="@{/resthome}">REST API</a>
+	
+</body>
+</html>

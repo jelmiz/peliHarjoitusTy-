@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>REST home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+
+<body>
+
+<h1>REST Home Page</h1>
+
+<h2>Hae kaikki konsolit</h2>
+<h3>Method: GET Endpoint: <a href="/konsolit">/konsolit</a></h3>
+<h3>JSON Example:</h3>
+
+<div>
+	<pre class ="tab">
+[
+  {
+    "konsoli_id": 1,
+    "name": "PS4",
+    "publisher": "Sony",
+    "price": 200.0
+  },
+  {
+    "konsoli_id": 2,
+    "name": "Switch",
+    "publisher": "Nintendo",
+    "price": 150.0
+  },
+  {
+    "konsoli_id": 3,
+    "name": "Xbox1",
+    "publisher": "Microsoft",
+    "price": 199.0
+  }
+]
+	</pre>
+</div>
+
+<h2>Hae konsoli id:n perusteella</h2>
+<h3>GET /konsolit/{konsoli_id} <a href="/konsolit/1">/konsolit/1</a></h3>
+<h3>JSON Example:</h3>
+
+<div>
+	<pre class ="tab">
+		{
+ 		 	"konsoli_id": 1,
+  			"name": "PS4",
+  			"publisher": "Sony",
+  			"price": 200.0
+		}
+	</pre>
+</div>
+
+
+
+</body>
+</html>

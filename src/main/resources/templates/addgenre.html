@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>luogenre</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<h1>Lisää uusi genre</h1>
+<body>
+	<form th:object="${genre}" th:action="@{savegenre}" action="#" method="post">
+		<label for="nimi">genren nimi: </label>
+		<input type="text" id="name" th:field="*{name}" /></br>
+		<input type="submit" value="Valmis"></input>
+	</form>
+</body>
+
+</html>

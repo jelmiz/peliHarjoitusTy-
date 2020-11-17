@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>pelilista</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+	<h1>Tietokannassa olevat pelit</h1>
+	<table>
+		<tr th:each= "peli:${pelit}">
+			<td th:text= "${ peli.name }"></td>
+			<td th:text= "${ peli.publisher }"></td>
+			<td th:text= "${ peli.price }"></td>
+			<td th:text= "${ peli.genre.name }"></td>
+			<td th:text= "${ peli.konsoli.name }"></td>
+  			<td><a th:href="@{/pelit/{id}/pelit(id=${peli.peli_id})}">Näytä</a></td>
+			<td><a th:href="@{/deletepeli/{id}(id=${peli.peli_id})}">Delete</a></td>
+		</tr>
+	</table>
+
+	<a th:href="@{/addpeli}">Lisää uusi peli</a><br />
+	<a th:href="@{/}">Konsolit</a><br />
+	<a th:href="@{/genrelist}">Genret</a><br />
+	<a th:href="@{/resthome}">REST API</a>
+	
+</body>
+</html>
