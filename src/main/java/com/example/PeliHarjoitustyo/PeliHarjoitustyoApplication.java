@@ -16,6 +16,10 @@ import com.example.PeliHarjoitustyo.domain.Konsoli;
 import com.example.PeliHarjoitustyo.domain.KonsoliRepository;
 import com.example.PeliHarjoitustyo.domain.Peli;
 import com.example.PeliHarjoitustyo.domain.PeliRepository;
+import com.example.PeliHarjoitustyo.domain.User;
+import com.example.PeliHarjoitustyo.domain.UserRepository;
+
+
 
 @SpringBootApplication
 public class PeliHarjoitustyoApplication extends SpringBootServletInitializer {
@@ -32,7 +36,7 @@ public class PeliHarjoitustyoApplication extends SpringBootServletInitializer {
 	}
 	
 	@Bean
-	public CommandLineRunner demo(KonsoliRepository konsolirepo, PeliRepository pelirepo, GenreRepository genrerepo) {
+	public CommandLineRunner demo(KonsoliRepository konsolirepo, PeliRepository pelirepo, GenreRepository genrerepo, UserRepository uRepository) {
 		return(args)-> {
 			
 			
@@ -61,7 +65,12 @@ public class PeliHarjoitustyoApplication extends SpringBootServletInitializer {
 			pelirepo.save(ekapeli);
 			pelirepo.save(tokapeli);
 			
-			
+			User user1 = new User("user", "$2y$10$Hf9NL8Ieu.Tw99PfPoD14.s2uBHJjDTnttr9YlSwMBPcaYJZTmTVu", "ROLE_USER");
+			//salasana user
+        	User user2 = new User("admin", "$2y$10$LX8vykzELW7F0BTjkylSuuh1EO0m896amOGXaE.vsQrSLMBlLE9bS", "ROLE_ADMIN");
+        	//salasana admin
+        	uRepository.save(user1);
+        	uRepository.save(user2);
 			
 			
 		};

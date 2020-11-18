@@ -8,14 +8,22 @@
 <h1>Lisää uusi peli</h1>
 <body>
 	<form th:object="${peli}" th:action="@{savepeli}" action="#" method="post">
-		<label for="name">Nimi: </label>
-		<input type="text" id="name" th:field="*{name}" /></br>
-		
-		<label for="publisher">Julkaisija: </label>
-		<input type="text" id="publisher" th:field="*{publisher}" /></br>
-		
-		<label for="price">Hinta: </label>
-		<input type="text" id="price" th:field="*{price}" /></br>
+		<table>
+	<tr>
+		<td><label for="name">Nimi: </label> </td>
+		<td><input type="text" id="name" th:field="*{name}" /> </td>
+		<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</td>
+		</tr>
+		<tr>
+		<td><label for="publisher">Julkaisija: </label></td>
+		<td><input type="text" id="publisher" th:field="*{publisher}" /></td>
+		<td th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher}">Error</td>
+		</tr>
+		<tr>
+		<td><label for="price">Hinta: </label></td>
+		<td><input type="text" id="price" th:field="*{price}" /></td>
+		</tr>
+		</table>
 		
 		<label for="genrelist">Genre</label>
 			<select id="genrelist" th:field="*{genre}" class="form-control">

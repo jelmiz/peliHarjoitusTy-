@@ -10,16 +10,24 @@
 	  
 	<h1>Lisää uusi Konsoli</h1>
 	<form th:object="${konsoli}" th:action="@{/savekonsoli}" action="#" method="post">
-		<label for="name">Nimi: </label>
-		<input type="text" id="name" th:field="*{name}" /></br>
-		
-		<label for="publisher">Julkaisija: </label>
-		<input type="text" id="publisher" th:field="*{publisher}" /></br>
-		
-		<label for="price">Hinta: </label>
-		<input type="text" id="price" th:field="*{price}" /></br>
-		
+	<table>
+	<tr>
+		<td><label for="name">Nimi: </label> </td>
+		<td><input type="text" id="name" th:field="*{name}" /> </td>
+		<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</td>
+		</tr>
+		<tr>
+		<td><label for="publisher">Julkaisija: </label></td>
+		<td><input type="text" id="publisher" th:field="*{publisher}" /></td>
+		<td th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher}">Error</td>
+		</tr>
+		<tr>
+		<td><label for="price">Hinta: </label></td>
+		<td><input type="text" id="price" th:field="*{price}" /></td>
+		</tr>
+		</table>
 		<input type="submit" value="Valmis"></input>
+		
 	</form>
 	
 	

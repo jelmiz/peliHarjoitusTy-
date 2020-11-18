@@ -1,27 +1,35 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>konsolilista</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
 <body>
-
+	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
 	<h1>Tietokannassa olevat konsolit</h1>
+	
 	<table>
 		<tr th:each= "konsoli:${konsolit}">
 			<td th:text= "${ konsoli.name }"></td>
 			<td th:text= "${ konsoli.publisher }"></td>
 			<td th:text= "${ konsoli.price }"></td>
-  			<td><a th:href="@{/konsolit/{id}(id=${konsoli.konsoli_id})}">Näytä </a></td>
-			<td><a th:href="@{/deletekonsoli/{id}(id=${konsoli.konsoli_id})}">Poista</a></td>
+			<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/deletekonsoli/{id}(id=${konsoli.konsoli_id})}">Poista</a></td>
 		</tr>
-	</table>
-
-	<a th:href="@{/addkonsoli}">Lisää uusi konsoli</a><br />
-	<a th:href="@{/pelilist}">Pelit</a><br />
-	<a th:href="@{/genrelist}">Genret</a><br />
-	<a th:href="@{/resthome}">REST API</a>
 	
+	<tr>
+	<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/addkonsoli}">Lisää uusi konsoli</a></td>
+	</tr>
+	<tr>
+	<td> <a th:href="@{/genrelist}">Genret</a></td>
+	<td> <a th:href="@{/pelilist}">Pelit</a></td>
+	<td sec:authorize="hasRole('ADMIN')"> <a th:href="@{/resthome}">REST API</a></td>
+	</tr>
+	</table>
+	<br>
+	<form th:action="@{/logout}" method = "post">
+	<input type="submit" value="Kirjaudu ulos" class="btn"/>
+	</form>
 </body>
 </html>

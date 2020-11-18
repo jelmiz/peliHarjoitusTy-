@@ -22,8 +22,7 @@ public class Peli {
 	@NotNull
     @Size(min=1, max=50)
 	String publisher;
-	@NotNull
-    @Size(min=1, max=50)
+	
 	double price;
 	
 	@ManyToOne

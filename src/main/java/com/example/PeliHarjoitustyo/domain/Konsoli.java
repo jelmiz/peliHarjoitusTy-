@@ -25,8 +25,7 @@ public class Konsoli {
 	@NotNull
     @Size(min=1, max=50)
 	private String publisher;
-	@NotNull
-    @Size(min=1, max=50)
+	
 	private double price;
 
 

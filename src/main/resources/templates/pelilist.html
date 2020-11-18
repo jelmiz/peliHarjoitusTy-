@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>pelilista</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -8,6 +9,7 @@
 <body>
 
 	<h1>Tietokannassa olevat pelit</h1>
+
 	<table>
 		<tr th:each= "peli:${pelit}">
 			<td th:text= "${ peli.name }"></td>
@@ -15,15 +17,22 @@
 			<td th:text= "${ peli.price }"></td>
 			<td th:text= "${ peli.genre.name }"></td>
 			<td th:text= "${ peli.konsoli.name }"></td>
-  			<td><a th:href="@{/pelit/{id}/pelit(id=${peli.peli_id})}">Näytä</a></td>
-			<td><a th:href="@{/deletepeli/{id}(id=${peli.peli_id})}">Delete</a></td>
+			<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/deletepeli/{id}(id=${peli.peli_id})}">Poista</a></td>
 		</tr>
-	</table>
-
-	<a th:href="@{/addpeli}">Lisää uusi peli</a><br />
-	<a th:href="@{/}">Konsolit</a><br />
-	<a th:href="@{/genrelist}">Genret</a><br />
-	<a th:href="@{/resthome}">REST API</a>
 	
+	<tr>
+	<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/addpeli}">Lisää uusi peli</a></td>
+	</tr>
+	<tr>
+	<td><a th:href="@{/}">Konsolit</a></td>
+	<td><a th:href="@{/genrelist}">Genret</a></td>
+	<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/resthome}">REST API</a>
+	<tr>
+	</table>
+	<br>
+	<form th:action="@{/logout}" method = "post">
+	<input type="submit" value="Kirjaudu ulos" class="btn"/>
+	</form>
 </body>
+
 </html>
