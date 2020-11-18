@@ -20,7 +20,7 @@ import com.example.PeliHarjoitustyo.web.UserDetailServiceImpl;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 @Override
 protected void configure(HttpSecurity http) throws Exception {
-http.authorizeRequests().antMatchers("/?lang=en", "/?lang=fi").permitAll().anyRequest().authenticated().and()
+http.authorizeRequests().antMatchers("/login", "/?lang=fi","/?lang=en").permitAll().anyRequest().authenticated().and()
 .formLogin()
 .loginPage("/login").defaultSuccessUrl("/").permitAll().and().logout().permitAll();
 }
