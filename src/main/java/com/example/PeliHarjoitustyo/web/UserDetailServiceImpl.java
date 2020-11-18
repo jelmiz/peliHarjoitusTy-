@@ -14,7 +14,7 @@ import com.example.PeliHarjoitustyo.domain.UserRepository;
 
 
 @Service
-public class UserDetailServiceImpl implements UserDetailsService  {
+public class UserDetailServiceImpl implements UserDetailsService{
     private final UserRepository repository;
 
     @Autowired

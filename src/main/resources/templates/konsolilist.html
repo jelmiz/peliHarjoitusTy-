@@ -7,29 +7,51 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 </head>
 
 <body>
-	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-	<h1>Tietokannassa olevat konsolit</h1>
+	<h1 th:text="#{Greeting}"></h1>
+	<h1 th:text="#{dbk}"></h1>
 	
 	<table>
+	<td  th:text= "#{ nimi }" ></td>
+	<td  th:text= "#{ julkaisija }" ></td>
+	<td  th:text= "#{ hinta }" ></td>
 		<tr th:each= "konsoli:${konsolit}">
 			<td th:text= "${ konsoli.name }"></td>
 			<td th:text= "${ konsoli.publisher }"></td>
 			<td th:text= "${ konsoli.price }"></td>
-			<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/deletekonsoli/{id}(id=${konsoli.konsoli_id})}">Poista</a></td>
+			<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/deletekonsoli/{id}(id=${konsoli.konsoli_id})}" th:text="#{Poista}"></a></td>
 		</tr>
 	
 	<tr>
-	<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/addkonsoli}">Lisää uusi konsoli</a></td>
+	<td sec:authorize="hasRole('ADMIN')" ><a th:href="@{/addkonsoli}" th:text="#{Lisaak}"></a></td>
 	</tr>
 	<tr>
-	<td> <a th:href="@{/genrelist}">Genret</a></td>
-	<td> <a th:href="@{/pelilist}">Pelit</a></td>
+	<td> <a th:href="@{/genrelist}" th:text="#{Genret}"></a></td>
+	<td> <a th:href="@{/pelilist}"th:text="#{Pelit}"></a></td>
 	<td sec:authorize="hasRole('ADMIN')"> <a th:href="@{/resthome}">REST API</a></td>
 	</tr>
 	</table>
 	<br>
 	<form th:action="@{/logout}" method = "post">
-	<input type="submit" value="Kirjaudu ulos" class="btn"/>
+	<button type="submit" class="btn" th:text="#{Kirjauduu}"></button>
 	</form>
+	<span th:text="#{lang.change}"></span>:
+	<select id="locales">
+    <option value=""></option>
+    <option value="fi" th:text="#{lang.fi}"></option>
+    <option value="en" th:text="#{lang.eng}"></option>
+    </select>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+		</script>
+	<script type="text/javascript">
+			$(document).ready(function() {
+    		$("#locales").change(function () {
+       		 var selectedOption = $('#locales').val();
+        	if (selectedOption != ''){
+            window.location.replace('?lang=' + selectedOption);
+        }
+    });
+});
+</script>
+</select>
 </body>
 </html>

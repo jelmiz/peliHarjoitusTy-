@@ -1,6 +1,11 @@
 package com.example.PeliHarjoitustyo;
 
 
+import java.util.Locale;
+
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -8,7 +13,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import com.example.PeliHarjoitustyo.domain.Genre;
 import com.example.PeliHarjoitustyo.domain.GenreRepository;
@@ -22,7 +31,7 @@ import com.example.PeliHarjoitustyo.domain.UserRepository;
 
 
 @SpringBootApplication
-public class PeliHarjoitustyoApplication extends SpringBootServletInitializer {
+public class PeliHarjoitustyoApplication extends SpringBootServletInitializer implements WebMvcConfigurer {
 	private static final Logger log = LoggerFactory.getLogger(PeliHarjoitustyoApplication.class);
 
 	
@@ -35,6 +44,24 @@ public class PeliHarjoitustyoApplication extends SpringBootServletInitializer {
 		SpringApplication.run(PeliHarjoitustyoApplication.class, args);
 	}
 	
+	@Bean
+    public LocaleResolver localeResolver() {
+        SessionLocaleResolver slr = new SessionLocaleResolver();
+        slr.setDefaultLocale(Locale.US);
+        return slr;
+    }
+
+    @Bean
+    public LocaleChangeInterceptor localeChangeInterceptor() {
+        LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
+        lci.setParamName("lang");
+        return lci;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(localeChangeInterceptor());
+    }
 	@Bean
 	public CommandLineRunner demo(KonsoliRepository konsolirepo, PeliRepository pelirepo, GenreRepository genrerepo, UserRepository uRepository) {
 		return(args)-> {

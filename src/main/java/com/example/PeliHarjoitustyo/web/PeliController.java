@@ -43,7 +43,8 @@ public class PeliController {
 	
 	
 	@RequestMapping(value = "/savepeli", method = RequestMethod.POST)
-	public String save(@Valid Peli peli, BindingResult bindingResult, Model model) {
+	public String save(@Valid Peli peli, BindingResult bindingResult, Model model)
+		{
 		  if (bindingResult.hasErrors()) {
 			  model.addAttribute("konsolit", konsoliRepository.findAll());
 			  model.addAttribute("genres", genreRepository.findAll());

@@ -4,31 +4,52 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>genrelista</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
 </head>
 
 <body>
 
-	<h1>Tietokannassa olevat genret</h1>
+	<h1 th:text="#{dbg}"></h1>
 	
 	<table>
+	 <td  th:text= "#{ Genret }" ></td>
 		<tr th:each= "genre:${genres}">
 			<td th:text= "${ genre.name }"></td>
-			<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/deletegenre/{id}(id=${genre.genre_id})}">Poista</a></td>
+			<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/deletegenre/{id}(id=${genre.genre_id})}" th:text="#{Poista}"></a></td>
 		</tr>
 	
 	<tr>
-	<td sec:authorize="hasRole('ADMIN')"> <a th:href="@{/addgenre}">Lisää uusi genre</a></td>
+	<td sec:authorize="hasRole('ADMIN')"> <a th:href="@{/addgenre}" th:text="#{Lisaag}"></a></td>
 	</tr>
 	<tr>
-	<td> <a th:href="@{/}">Konsolit</a></td>
-	<td> <a th:href="@{/pelilist}">Pelit</a></td>	
+	<td> <a th:href="@{/}" th:text="#{Konsolit}"></a></td>
+	<td> <a th:href="@{/pelilist}" th:text="#{Pelit}"></a></td>	
 	<td sec:authorize="hasRole('ADMIN')"> <a th:href="@{/resthome}">REST API</a></td>
 	</tr>
 	</table>
 	<br>
 	<form th:action="@{/logout}" method = "post">
-	<input type="submit" value="Kirjaudu ulos" class="btn"/>
+	<button type="submit" class="btn" th:text="#{Kirjauduu}"></button>
 	</form>
+	<span th:text="#{lang.change}"></span>:
+	<select id="locales">
+    <option value=""></option>
+    <option value="fi" th:text="#{lang.fi}"></option>
+    <option value="en" th:text="#{lang.eng}"></option>
+    </select>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+		</script>
+	<script type="text/javascript">
+			$(document).ready(function() {
+    		$("#locales").change(function () {
+       		 var selectedOption = $('#locales').val();
+        	if (selectedOption != ''){
+            window.location.replace('?lang=' + selectedOption);
+        }
+    });
+});
+</script>
+</select>
 	
 </body>
 </html>

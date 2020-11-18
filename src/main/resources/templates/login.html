@@ -6,10 +6,30 @@
 	
 </head>
 <div th:if="${param.error}">
-<p>Invalid username and/or password.<p>
+<p><span th:text="#{virhe}"></span><p>
 </div>
 <form th:action="@{/login}" method="post">
-<div><label> Username : <input type="text" name="username"/> </label></div>
-<div><label> Password: <input type="password" name="password"/> </label></div>
-<div><input type="submit" value="Sign In"/></div>
+<div><label><span th:text="#{uname}"></span>&nbsp;<input type="text" name="username"/> </label></div>
+<div><label><span th:text="#{salis}"></span>&nbsp;<input type="password" name="password"/> </label></div>
+<div><button type="submit" class="btn" th:text="#{Kirjaudus}"></button></div>
+<br>
+<span th:text="#{lang.change}"></span>:
+	<select id="locales">
+    <option value=""></option>
+    <option value="fi" th:text="#{lang.fi}"></option>
+    <option value="en" th:text="#{lang.eng}"></option>
+    </select>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+		</script>
+	<script type="text/javascript">
+			$(document).ready(function() {
+    		$("#locales").change(function () {
+       		 var selectedOption = $('#locales').val();
+        	if (selectedOption != ''){
+            window.location.replace('?lang=' + selectedOption);
+        }
+    });
+});
+</script>
+</select>
 </form>
