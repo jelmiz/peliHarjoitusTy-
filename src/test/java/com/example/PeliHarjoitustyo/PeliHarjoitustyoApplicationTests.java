@@ -12,6 +12,7 @@ import com.example.PeliHarjoitustyo.web.GenreController;
 import com.example.PeliHarjoitustyo.web.KonsoliController;
 import com.example.PeliHarjoitustyo.web.PeliController;
 import com.example.PeliHarjoitustyo.web.RESTController;
+import com.example.PeliHarjoitustyo.domain.GenreRepository;
 import com.example.PeliHarjoitustyo.domain.Konsoli;
 import com.example.PeliHarjoitustyo.domain.KonsoliRepository;
 import java.util.List;
@@ -31,6 +32,7 @@ class PeliHarjoitustyoApplicationTests {
 	private GenreController genreController;
 	@Autowired
 	private KonsoliRepository krepo;
+
 	@Test
 	void contextLoads() throws Exception{
 		 assertThat(konsoliController).isNotNull();
@@ -45,5 +47,6 @@ class PeliHarjoitustyoApplicationTests {
 		assertThat(konsolit).hasSize(1);
 		assertThat(konsolit.get(0).getPublisher()).isEqualTo("Sony");
 	}
+	
 
 }
